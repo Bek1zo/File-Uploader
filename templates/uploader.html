@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка файлов</title>
+</head>
+<body>
+<div class="wrapper">
+    <header>Загрузка файлов</header>
+    <form action = "/upload" method = "post" enctype="multipart/form-data" class="upload-form">
+        <input id="upload-button" class="upload-button" type="file" name="file" />
+        <input class="input-info" name="input-info" placeholder="Укажите дополнительную информацию" type="text"/>
+        <input class="submit-button" type = "submit" value="Загрузить файл">
+    </form>
+
+    <div class="container">
+        <h2 style="color: #6990F2;">Список загруженных файлов <small>МИГ: Учет кадров</small></h2>
+        <ul class="responsive-table">
+            <li class="table-header">
+                <div class="col col-1">Наименование</div>
+                <div class="col col-2">Дополнительная информация</div>
+                <div class="col col-3">IP</div>
+                <div class="col col-4">Дата загрузки</div>
+            </li>
+            {% for file_item in file_list %}
+                <li class="table-row">
+                    <div class="col col-1" data-label="Наименование">{{ file_item.file_name }}</div>
+                    <div class="col col-2" data-label="Дополнительная информация">{{ file_item.comment }}</div>
+                    <div class="col col-3" data-label="IP">{{ file_item.ip }}</div>
+                    <div class="col col-4" data-label="Дата загрузки">{{ file_item.date }}</div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
+
+<style>
+    @font-face {
+        font-family: 'Roboto';
+        src: {{ url_for('static', filename='Roboto/Roboto-Regular.ttf') }};
+    }
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 50vh;
+        background: #6990F2;
+        font-family: 'Roboto', serif !important;
+    }
+
+    .input-info {
+        width: 90%;
+        height: 100px;
+    }
+
+    .upload-form {
+        display: flex;
+        gap: 10px;
+        margin: 30px;
+        padding: 20px;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        border-radius: 5px;
+        border: 2px dashed #6990F2;
+    }
+
+    .upload-button {
+        all: unset;
+        border-radius: 3px;
+        width: 90%;
+        padding: 5px;
+        cursor: pointer;
+        color: #fff;
+        font-size: 16px;
+        font-family: "Roboto", sans-serif;
+        font-weight: bold;
+        background-color: #6990F2;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+
+    .submit-button {
+        all: unset;
+        display: flex;
+        justify-content: center;
+        width: 200px;
+        height: 50px;
+        color: #fff;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        font-family: "Roboto", sans-serif;
+        font-size: 16px;
+        background-color: #6990F2;
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    }
+
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    h2 {
+        font-size: 26px;
+        margin: 20px 0;
+        text-align: center;
+        small {
+            font-size: 0.5em;
+        }
+    }
+
+    .responsive-table {
+        .col {
+            overflow-x:hidden
+        }
+        li {
+            border-radius: 3px;
+            padding: 25px 30px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        .table-header {
+            background-color: #6990F2;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+        .table-row {
+            background-color: #ffffff;
+            box-shadow: 0px 0px 9px 0px rgba(0,0,0,0.1);
+        }
+        .col-1 {
+            width: 25%;
+        }
+        .col-2 {
+            width: 55%;
+        }
+        .col-3 {
+            width: 10%;
+        }
+        .col-4 {
+            width: 10%;
+        }
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    .wrapper{
+        margin-top: 50px;
+        width: 90%;
+        background: #fff;
+        border-radius: 5px;
+        padding: 30px;
+        box-shadow: 7px 7px 12px rgba(0,0,0,0.05);
+    }
+    .wrapper header{
+        color: #6990F2;
+        font-size: 27px;
+        font-weight: 600;
+        text-align: center;
+    }
+</style>
